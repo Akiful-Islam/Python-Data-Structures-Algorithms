@@ -3,7 +3,7 @@ class Node:
         self.value=value
         self.next=None
         
-class LinkedList:
+class SinglyLinkedList:
     def __init__(self, value):
         new_node=Node(value)
         self.head=new_node
@@ -37,11 +37,11 @@ class LinkedList:
         if self.length==0:
             return None
         temp = self.head
-        previous = self.head            
+        before = self.head            
         while (temp.next):
-            previous=temp
+            before=temp
             temp=temp.next
-        self.tail = previous
+        self.tail = before
         self.tail.next = None
         self.length-=1
         if self.length==0:
@@ -87,7 +87,8 @@ class LinkedList:
         new_node.next=temp.next
         temp.next=new_node
         self.length+=1
-        return True
+        return 
+    
     def remove(self, index):
         if(index<0 or index >= self.length):
             return None
@@ -95,9 +96,9 @@ class LinkedList:
             return self.pop_first
         if(index==self.length):
             return self.pop
-        previous = self.get_value(index-1)
-        temp = previous.next
-        previous.next=temp.next
+        before = self.get_value(index-1)
+        temp = before.next
+        before.next=temp.next
         temp.next=None
         self.length-=1
         return temp.value
@@ -127,7 +128,7 @@ class LinkedList:
                 temp=temp.next
           
         
-new_linked_list = LinkedList(5)
+new_linked_list = SinglyLinkedList(5)
 new_linked_list.append(10)
 new_linked_list.prepend(12)
 new_linked_list.append(1)
