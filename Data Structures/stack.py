@@ -24,13 +24,21 @@ class Stack:
         if self.height is 0:
             return None
         elif self.height is 1:
+            temp = self.top
             self.top=None
+            return temp.value
         else:
             temp=self.top
             self.top=temp.next
             temp.next=None
         self.height-=0
         return temp.value
+    
+    def peek(self):
+        if self.height is 0:
+            return None
+        else:
+            return self.top.value
         
 
     def print_stack(self):

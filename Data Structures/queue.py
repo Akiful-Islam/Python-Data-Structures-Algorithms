@@ -31,14 +31,22 @@ class Queue:
         if(self.length==0):
             return None
         elif(self.length==1):
+            temp = self.first
             self.first=None
             self.last=None
+            return temp.value
         else:
             temp=self.first
             self.first=temp.next
             temp.next=None
         self.length-=1
-        return temp.values
+        return temp.value
+    
+    def peek(self):
+        if self.length is 0:
+            return None
+        else:
+            return self.first.value
         
     
     def print_queue(self):

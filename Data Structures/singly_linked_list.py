@@ -60,7 +60,20 @@ class SinglyLinkedList:
             self.tail = None
         return temp.value
     
+    def set_value(self,value,index):
+        temp = self.__get_node(index)
+        if temp:
+            temp.value=value
+            return True
+        return False
+    
     def get_value(self,index):
+        temp = self.__get_node(index)
+        if temp:
+            return temp.value
+        return None
+    
+    def __get_node(self,index):
         if(index<0 or index>=self.length):
             return None
         temp=self.head
@@ -68,35 +81,28 @@ class SinglyLinkedList:
             temp=temp.next
         return temp
     
-    def set_value(self,value,index):
-        temp = self.get_value(index)
-        if temp:
-            temp.value=value
-            return True
-        return False
-    
     def insert(self,value,index):
-        if(index<0 or index >= self.length):
+        if(index<0 or index > self.length):
             return False
         if(index==0):
             return self.prepend
         if(index==self.length):
             return self.append
         new_node = Node(value)
-        temp = self.get_value(index-1)
+        temp = self.__get_node(index-1)
         new_node.next=temp.next
         temp.next=new_node
         self.length+=1
         return 
     
     def remove(self, index):
-        if(index<0 or index >= self.length):
+        if(index<0 or index > self.length):
             return None
         if(index==0):
             return self.pop_first
         if(index==self.length):
             return self.pop
-        before = self.get_value(index-1)
+        before = self.__get_node(index-1)
         temp = before.next
         before.next=temp.next
         temp.next=None

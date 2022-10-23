@@ -28,8 +28,51 @@ class BinarySearchTree:
                     temp.right=new_node
                     return True
                 temp=temp.right
+    
+    def remove(self, value):
+        if self.root is None:
+            return False
+        temp=self.root
+        parent=None
+        while(temp):
+            if(value<temp.value):
+                parent=temp
+                temp=temp.left
+            elif(value>temp.value):
+                parent=temp
+                temp=temp.right
+            else:
+                if temp.left is None:
+                    if parent is None:
+                        self.root=temp.right
+                    else:
+                        if temp.value<parent.value:
+                            parent.left=temp.right
+                        elif temp.value>parent.value:
+                            parent.right=temp.right
+                elif temp.right is None:
+                    if parent is None:
+                        self.root=temp.left
+                    else:
+                        if temp.value<parent.value:
+                            parent.left=temp.left
+                        elif temp.value>parent.value:
+                            parent.right=temp.left
+                else:
+                    parent_of_rightmost=temp
+                    rightmost=temp.right
+                    while(rightmost.left):
+                        parent_of_rightmost=rightmost
+                        rightmost=rightmost.left
+                    temp.value=rightmost.value
+                    if parent_of_rightmost.right==rightmost:
+                        parent_of_rightmost.right=rightmost.right
+                    else:
+                        parent_of_rightmost.left=rightmost.right
+                return True
+        return False
                 
-    def contains(self,value):
+    def exists(self,value):
         temp=self.root
         while(temp):
             if(value<temp.value):
@@ -38,5 +81,4 @@ class BinarySearchTree:
                 temp=temp.right
             else:
                 return True
-        
         return False
