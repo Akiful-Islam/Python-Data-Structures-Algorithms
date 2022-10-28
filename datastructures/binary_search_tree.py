@@ -82,3 +82,73 @@ class BinarySearchTree:
             else:
                 return True
         return False
+    
+    def breadth_first_traversal(self):
+        if self.root is None:
+            return []
+        queue=[self.root]
+        result=[]
+        while(queue):
+            temp=queue.pop(0)
+            result.append(temp.value)
+            if temp.left:
+                queue.append(temp.left)
+            if temp.right:
+                queue.append(temp.right)
+        return result
+    
+    def depth_first_traversal_inorder(self):
+        result=[]
+        def traverse(node):
+            if node.left:
+                traverse(node.left)
+            result.append(node.value)
+            if node.right:
+                traverse(node.right)
+        traverse(self.root)
+        return result
+    
+    def depth_first_traversal_preorder(self):
+        result=[]
+        def traverse(node):
+            result.append(node.value)
+            if node.left:
+                traverse(node.left)
+            if node.right:
+                traverse(node.right)
+        traverse(self.root)
+        return result
+    
+    def depth_first_traversal_postorder(self):
+        result=[]
+        def traverse(node):
+            if node.left:
+                traverse(node.left)
+            if node.right:
+                traverse(node.right)
+            result.append(node.value)
+        traverse(self.root)
+        return result
+
+tree = BinarySearchTree(10)
+
+tree.insert(5)
+tree.insert(15)
+tree.insert(2)
+tree.insert(12)
+tree.insert(8)
+tree.insert(20)
+    
+print(tree.breadth_first_traversal())
+print(tree.depth_first_traversal_inorder())
+print(tree.depth_first_traversal_preorder())
+print(tree.depth_first_traversal_postorder())
+
+tree.remove(10)
+tree.remove(1)
+tree.remove(20)
+
+print(tree.breadth_first_traversal())
+print(tree.depth_first_traversal_inorder())
+print(tree.depth_first_traversal_preorder())
+print(tree.depth_first_traversal_postorder())

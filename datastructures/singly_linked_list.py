@@ -109,6 +109,14 @@ class SinglyLinkedList:
         self.length-=1
         return temp.value
     
+    def contains(self, value):
+        temp = self.head
+        while temp:
+            if temp.value == value:
+                return True
+            temp=temp.next
+        return False
+    
     def reverse(self):
         temp = self.head
         before = None
